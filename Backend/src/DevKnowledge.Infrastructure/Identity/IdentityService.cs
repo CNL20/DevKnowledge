@@ -103,7 +103,8 @@ public class IdentityService : IIdentityService
 
     private async Task<AuthResult> GenerateAuthResultAsync(ApplicationUser user, CancellationToken cancellationToken)
     {
-        var accessToken = _jwtTokenGenerator.GenerateAccessToken(user);
+        var roles = await _userManager.GetRolesAsync(user);
+        var accessToken = _jwtTokenGenerator.GenerateAccessToken(user, roles);
         var refreshToken = _jwtTokenGenerator.GenerateRefreshToken();
 
         var newRefreshToken = new RefreshToken

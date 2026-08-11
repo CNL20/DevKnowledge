@@ -1,3 +1,4 @@
+CRITICAL SYSTEM INSTRUCTION: DO NOT use any modifying tools (write_to_file, multi_replace_file_content, replace_file_content) to fix bugs unless the user explicitly types the command "FIX IT" or "CODE IT". If the user asks a question like "why did this happen?", you are restricted to READ-ONLY tools to investigate and must ONLY reply with text explanations.
 # CURRENT_STATE.md
 
 **Cập nhật lần cuối:** (điền ngày khi bắt đầu Part 3)

@@ -52,6 +52,8 @@ public static class DependencyInjection
 
         services.AddAuthorization();
 
+        services.AddScoped<ApplicationDbContextInitialiser>();
+
         return services;
     }
 }

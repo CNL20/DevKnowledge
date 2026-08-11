@@ -9,7 +9,7 @@ namespace DevKnowledge.Infrastructure.Identity;
 
 public interface IJwtTokenGenerator
 {
-    string GenerateAccessToken(ApplicationUser user);
+    string GenerateAccessToken(ApplicationUser user, IList<string> roles);
     string GenerateRefreshToken();
 }
 
@@ -22,14 +22,19 @@ public class JwtTokenGenerator : IJwtTokenGenerator
         _jwtSettings = jwtOptions.Value;
     }
 
-    public string GenerateAccessToken(ApplicationUser user)
+    public string GenerateAccessToken(ApplicationUser user, IList<string> roles)
     {
-        var claims = new[]
+        var claims = new List<Claim>
         {
             new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
             new Claim(JwtRegisteredClaimNames.Email, user.Email!),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
         };
+
+        foreach (var role in roles)
+        {
+            claims.Add(new Claim(ClaimTypes.Role, role));
+        }
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Secret));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);

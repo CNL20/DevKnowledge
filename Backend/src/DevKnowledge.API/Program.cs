@@ -1,5 +1,6 @@
 using DevKnowledge.Application;
 using DevKnowledge.Infrastructure;
+using DevKnowledge.Infrastructure.Persistence;
 using DevKnowledge.API.Middleware;
 using Scalar.AspNetCore;
 
@@ -12,7 +13,10 @@ builder.Services.AddControllers();
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 
-builder.Services.AddOpenApi();
+builder.Services.AddOpenApi(options =>
+{
+    options.AddDocumentTransformer<DevKnowledge.API.Infrastructure.BearerSecuritySchemeTransformer>();
+});
 
 var app = builder.Build();
 
@@ -21,6 +25,13 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
     app.MapScalarApiReference();
+
+    // Khởi tạo Database Seeding
+    using (var scope = app.Services.CreateScope())
+    {
+        var initialiser = scope.ServiceProvider.GetRequiredService<ApplicationDbContextInitialiser>();
+        await initialiser.SeedAsync();
+    }
 }
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();

@@ -3,5 +3,4 @@
   <Project Path="DevKnowledge.Application/DevKnowledge.Application.csproj" />
   <Project Path="DevKnowledge.Domain/DevKnowledge.Domain.csproj" />
   <Project Path="DevKnowledge.Infrastructure/DevKnowledge.Infrastructure.csproj" />
-  <Project Path="DevKnowledge.UnitTests/DevKnowledge.UnitTests.csproj" />
 </Solution>

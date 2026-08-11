@@ -1,7 +1,7 @@
-using DevKnowledge.Application.Auth.Commands.Login;
-using DevKnowledge.Application.Auth.Commands.Logout;
-using DevKnowledge.Application.Auth.Commands.Refresh;
-using DevKnowledge.Application.Auth.Commands.Register;
+using DevKnowledge.Application.Features.Auth.Commands.Login;
+using DevKnowledge.Application.Features.Auth.Commands.Logout;
+using DevKnowledge.Application.Features.Auth.Commands.Refresh;
+using DevKnowledge.Application.Features.Auth.Commands.Register;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

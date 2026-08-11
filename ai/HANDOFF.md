@@ -16,6 +16,16 @@
 
 ---
 
+### [2026-08-10] Hoàn thành Phase 1: Core Authentication
+- Đã làm / File đã thay đổi: Setup Clean Architecture .NET 10, Entity Framework Identity, MediatR, FluentValidation, JWT Token, Scalar OpenAPI. Khởi tạo `docs/features/Auth.md`.
+- Trạng thái hiện tại: Đã xong 100% tính năng Authentication. Passed toàn bộ 7/7 Unit Tests. Cập nhật `CURRENT_STATE.md`.
+- Quyết định đã chốt: Không dùng thư viện JWT cồng kềnh, tự thiết lập luồng Refresh Token lưu hash vào database.
+- Quyết định pending: Cấu trúc thư mục (Features vs Root trong Application layer) đang đợi User quyết định.
+- Issue / Blocker: Không có.
+- Việc cần làm tiếp theo: Push code lên GitHub và bắt đầu Phase 2 (Domain Structure & Category/Topic).
+
+---
+
 ### [2026-08-10] Hoàn thành Part 3 Development Roadmap
 - Đã làm / File đã thay đổi: `docs/product/PART3_DEVELOPMENT_ROADMAP.md`, `ai/CURRENT_STATE.md`, `docs/architecture/PART2_ARCHITECTURE.md`.
 - Trạng thái hiện tại: Đã chốt xong toàn bộ Roadmap gồm 9 Phase.

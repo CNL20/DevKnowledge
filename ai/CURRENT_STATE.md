@@ -3,7 +3,7 @@
 **Cập nhật lần cuối:** (điền ngày khi bắt đầu Part 3)
 
 ## Phase hiện tại
-`Foundation` — đã hoàn thành skeleton kiến trúc (Part 2). Chuẩn bị chuyển sang Part 3.
+`Phase 2` — Thiết lập Domain Structure & Topic Management (Part 3 Roadmap).
 
 ## Đã hoàn thành
 - [x] Product Specification (Part 1)
@@ -18,6 +18,6 @@
 - [x] Part 3 — Development Roadmap (đã chốt 9 Phase)
 
 ## Đang chờ
-- Khởi tạo Solution và Project C# (.NET 10)
-- Bắt đầu implement Phase 1: Authentication
-Authentication, Knowledge Management, Source Management, AI Pipeline, Learning, Technical English, Admin, Knowledge Graph.
+- Bắt đầu implement Phase 2: Domain Structure (Categories, Topics)
+- Authentication đã hoàn thành (Phase 1)
+- Các Phase còn lại: Knowledge Management, Source Management, AI Pipeline, Learning, Technical English, Admin, Knowledge Graph.

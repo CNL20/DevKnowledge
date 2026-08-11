@@ -1,15 +1,17 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using DevKnowledge.Application.Common.Interfaces;
 using DevKnowledge.Domain.Entities;
+using DevKnowledge.Infrastructure.Identity;
 
 namespace DevKnowledge.Infrastructure.Persistence;
 
-// Khung DbContext - áp dụng Configurations (Fluent API) bằng ApplyConfigurationsFromAssembly ở Part 3.
-public class ApplicationDbContext : DbContext, IApplicationDbContext
+public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>, IApplicationDbContext
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
-    public DbSet<User> Users => Set<User>();
+    public DbSet<RefreshToken> RefreshTokens => Set<RefreshToken>();
     public DbSet<Domain.Entities.Domain> Domains => Set<Domain.Entities.Domain>();
     public DbSet<Topic> Topics => Set<Topic>();
     public DbSet<Knowledge> Knowledges => Set<Knowledge>();
@@ -17,11 +19,20 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     public DbSet<KnowledgeSource> KnowledgeSources => Set<KnowledgeSource>();
     public DbSet<CodeExample> CodeExamples => Set<CodeExample>();
     public DbSet<TechTerm> TechTerms => Set<TechTerm>();
-    public DbSet<LearningProgress> LearningProgresses => Set<LearningProgress>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
         base.OnModelCreating(modelBuilder);
+        
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+
+        // Rename Identity tables
+        modelBuilder.Entity<ApplicationUser>().ToTable("users");
+        modelBuilder.Entity<IdentityRole<Guid>>().ToTable("roles");
+        modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("user_roles");
+        modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("user_claims");
+        modelBuilder.Entity<IdentityUserLogin<Guid>>().ToTable("user_logins");
+        modelBuilder.Entity<IdentityRoleClaim<Guid>>().ToTable("role_claims");
+        modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("user_tokens");
     }
 }

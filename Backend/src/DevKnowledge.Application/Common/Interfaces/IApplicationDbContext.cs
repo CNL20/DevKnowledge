@@ -6,7 +6,6 @@ namespace DevKnowledge.Application.Common.Interfaces;
 // Abstraction cho DbContext để Application layer không phụ thuộc trực tiếp vào EF Core (Infrastructure).
 public interface IApplicationDbContext
 {
-    DbSet<User> Users { get; }
     DbSet<Domain.Entities.Domain> Domains { get; }
     DbSet<Topic> Topics { get; }
     DbSet<Knowledge> Knowledges { get; }
@@ -14,7 +13,8 @@ public interface IApplicationDbContext
     DbSet<KnowledgeSource> KnowledgeSources { get; }
     DbSet<CodeExample> CodeExamples { get; }
     DbSet<TechTerm> TechTerms { get; }
-    DbSet<LearningProgress> LearningProgresses { get; }
+
+    DbSet<TEntity> Set<TEntity>() where TEntity : class;
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

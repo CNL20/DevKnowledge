@@ -16,9 +16,19 @@ public class ExceptionHandlingMiddleware
         {
             await _next(context);
         }
+        catch (ValidationException ex)
+        {
+            context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            await context.Response.WriteAsync(JsonSerializer.Serialize(new { error = "Validation failed", errors = ex.Errors }));
+        }
         catch (NotFoundException ex)
         {
             context.Response.StatusCode = (int)HttpStatusCode.NotFound;
+            await context.Response.WriteAsync(JsonSerializer.Serialize(new { error = ex.Message }));
+        }
+        catch (UnauthorizedAccessException ex)
+        {
+            context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
             await context.Response.WriteAsync(JsonSerializer.Serialize(new { error = ex.Message }));
         }
         catch (Exception ex)
